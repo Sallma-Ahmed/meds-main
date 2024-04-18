@@ -28,7 +28,7 @@ app.use("/request", sendreq);
 app.use("/auth", auth);
 app.use("/cat", addcat);
 app.use("/med", addmed);
-app.use("/fil", filter);
+app.use("/filter", filter);
 app.use("/user", adduser);
 app.use("/hisreq", hisreq);
 app.use("/sendreq", sendreq);

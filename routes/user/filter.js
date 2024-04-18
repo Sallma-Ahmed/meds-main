@@ -27,7 +27,7 @@ router.get('/:id_user', async (req, res) => {
       // await historyRecord.save();
     }
 
-    const medicine_model = await MedicineModel.find(search);
+    const medicine_model = await Med.find(search);
     if (medicine_model.length > 0) {
       res.status(200).json(medicine_model);
     } else {
@@ -41,7 +41,7 @@ router.get('/:id_user', async (req, res) => {
 // Filter medicine_model by userfid
 router.get('/user/:userfid', async (req, res) => {
   try {
-    const med = await MedicineModel.find({ userfid: req.params.userfid });
+    const med = await Med.find({ userfid: req.params.userfid });
     if (!med || med.length === 0) {
       return res.status(404).json({ ms: 'Med not found!' });
     }
@@ -54,7 +54,7 @@ router.get('/user/:userfid', async (req, res) => {
 // Filter medicine_model by namefcategory
 router.get('/category/:namefcategory', async (req, res) => {
   try {
-    const med = await MedicineModel.find({ namefcategory: req.params.namefcategory });
+    const med = await Med.find({ namefcategory: req.params.namefcategory });
     if (!med || med.length === 0) {
       return res.status(404).json({ ms: 'Med not found!' });
     }
