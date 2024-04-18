@@ -42,7 +42,7 @@ router.get('', async (req, res) => {
       // Search by status
       search = { statut_req: { $regex: req.query.search, $options: 'i' } };
     }
-    const requests = await RequestModel.find(search);
+    const requests = await ReqModel.find(search);
     res.status(200).json(requests);
   } catch (err) {
     res.status(500).json(err);
@@ -52,7 +52,7 @@ router.get('', async (req, res) => {
 // Filter by category name
 router.get('/:namenewca', async (req, res) => {
   try {
-    const requests = await RequestModel.find({ namenewca: req.params.namenewca });
+    const requests = await ReqModel.find({ namenewca: req.params.namenewca });
     if (!requests || requests.length === 0) {
       return res.status(404).json({ ms: 'Request not found!' });
     }
