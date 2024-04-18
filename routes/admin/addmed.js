@@ -6,7 +6,7 @@ const Med = require('../../models/medModel');
 router.post('/', async (req, res) => {
   try {
     const med = new Med({
-      id_med: req.body.id_med,
+      _id: req.body._id,
       price: req.body.price,
       Name_meds: req.body.Name_meds,
       description_meds: req.body.description_meds,
@@ -23,10 +23,10 @@ router.post('/', async (req, res) => {
 });
 
 // UPDATE MED
-router.put('/:id_med', async (req, res) => {
+router.put('/:_id', async (req, res) => {
   try {
     const med = await Med.findOneAndUpdate(
-      { id_med: req.params.id_med },
+      { _id: req.params._id},
       { price: req.body.price },
       { new: true }
     );
@@ -42,9 +42,9 @@ router.put('/:id_med', async (req, res) => {
 });
 
 // DELETE MED
-router.delete('/delete/:id_med', async (req, res) => {
+router.delete('/delete/:_id', async (req, res) => {
   try {
-    const med = await Med.findOneAndDelete({ id_med: req.params.id_med });
+    const med = await Med.findOneAndDelete({ _id: req.params._id });
 
     if (!med) {
       return res.status(404).json({ msg: 'Med not found!' });
