@@ -3,11 +3,11 @@ const ReqModel = require('../../models/reqModel');
 
 
 // UPDATE req_model
-router.put('/:idfreq', async (req, res) => {
+router.put('/:_id', async (req, res) => {
   try {
     const response = await ReqModel.findOneAndUpdate(
-      { idfreq: req.params.idfreq },
-      { statut_req: req.body.statut_req },
+      { _id: req.params._id },
+      { status: req.body.status },
       { new: true }
     );
 
