@@ -6,7 +6,7 @@ const Med = require('../../models/medModel');
 router.post('/', async (req, res) => {
   try {
     const med = new Med({
-      _id: req.body._id,
+      id_med: req.body.id_med,
       price: req.body.price,
       Name_meds: req.body.Name_meds,
       description_meds: req.body.description_meds,
