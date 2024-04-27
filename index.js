@@ -13,8 +13,6 @@ const auth = require("./routes/auth");
 const filter = require("./routes/user/filter");
 const sendreq = require("./routes/user/sendreq");
 
-
-
 const app = express();
 app.use(cors());
 app.use(express.json());
