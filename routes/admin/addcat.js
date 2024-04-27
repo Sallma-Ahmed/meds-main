@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const Category = require("../../models/categoryModel"); 
+const Category = require("../../models/categoryModel");
+const authorized= require("../../middleware/authorize");
+const admin = require("../../middleware/admin");
 
 // CREATE category
-router.post("/", async (req, res) => {
+router.post("/", authorized, admin, async (req, res) => {
   try {
     const category = new Category({
       Name_Category: req.body.Name_Category,
@@ -22,7 +24,7 @@ router.post("/", async (req, res) => {
 });
 
 // UPDATE description_Category
-router.put("/update/:id", async (req, res) => {
+router.put("/update/:id", authorized, admin, async (req, res) => {
   try {
     const category = await Category.findById(req.params.id);
     if (!category) {
@@ -41,10 +43,8 @@ router.put("/update/:id", async (req, res) => {
   }
 });
 
-
-
 // LIST & SEARCH BY THE Name_ OF THE Category
-router.get("/", async (req, res) => {
+router.get("/", authorized, async (req, res) => {
   try {
     let search = {};
     if (req.query.search) {

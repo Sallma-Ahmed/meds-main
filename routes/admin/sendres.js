@@ -1,9 +1,12 @@
 const router = require('express').Router();
 const ReqModel = require('../../models/reqModel');
+const authorized = require('../../middleware/authorize');
+const admin = require('../../middleware/admin');
+
 
 
 // UPDATE req_model
-router.put('/:_id', async (req, res) => {
+router.put('/:_id', authorized, async (req, res) => {
   try {
     const response = await ReqModel.findOneAndUpdate(
       { _id: req.params._id },

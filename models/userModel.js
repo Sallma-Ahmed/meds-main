@@ -9,6 +9,11 @@ const userSchema = new mongoose.Schema({
   type: { type: Boolean, required: true },
   status: { type: Boolean, required: true },
   token: { type: String, required: true },
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user',
+},
 });
 
 const userModel = mongoose.model("userModel", userSchema);

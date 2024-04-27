@@ -2,8 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const Med = require('../../models/medModel');
+const authorized = require('../../middleware/authorize');
+const admin = require('../../middleware/admin');
+
 // ADD MED
-router.post('/', async (req, res) => {
+router.post('/', authorized, async (req, res) => {
   try {
     const med = new Med({
       id_med: req.body.id_med,
@@ -23,10 +26,10 @@ router.post('/', async (req, res) => {
 });
 
 // UPDATE MED
-router.put('/:_id', async (req, res) => {
+router.put('/update/:_id', authorized, async (req, res) => {
   try {
     const med = await Med.findOneAndUpdate(
-      { _id: req.params._id},
+      { _id: req.params._id },
       { price: req.body.price },
       { new: true }
     );
@@ -35,14 +38,16 @@ router.put('/:_id', async (req, res) => {
       return res.status(404).json({ msg: 'Med not found!' });
     }
 
-    res.status(200).json({ msg: 'Med updated successfully!' });
+    res.status(200).json({ msg: 'Med updated successfully!', med });
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err);
+    res.status(500).json({ msg: 'Internal Server Error' });
   }
 });
 
+
 // DELETE MED
-router.delete('/delete/:_id', async (req, res) => {
+router.delete('/delete/:_id', authorized, async (req, res) => {
   try {
     const med = await Med.findOneAndDelete({ _id: req.params._id });
 
@@ -57,7 +62,7 @@ router.delete('/delete/:_id', async (req, res) => {
 });
 
 // LIST & SEARCH MED
-router.get('/', async (req, res) => {
+router.get('/', authorized, async (req, res) => {
   try {
     const search = {};
     if (req.query.search) {

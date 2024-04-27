@@ -1,4 +1,6 @@
+
 const express = require('express');
+
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
@@ -13,10 +15,11 @@ router.post('/', async (req, res) => {
       phone_user: req.body.phone_user,
       name_user: req.body.name_user,
       email: req.body.email,
-      password: await bcrypt.hash(req.body.password, 10), // Use bcrypt to hash the password
+      password: await bcrypt.hash(req.body.password, 10), 
       type: req.body.type,
       status: req.body.status,
       token: crypto.randomBytes(16).toString('hex'),
+      role: req.body.role,
     });
 
     await user.save();
