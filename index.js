@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const connectToMongoDB = require('./db/dbconnection');
+const session = require('express-session')
 // Import routes here...
 const hisreq = require("./routes/admin/hisreq");
 const sendres = require("./routes/admin/sendres");
@@ -11,13 +12,14 @@ const addmed = require("./routes/admin/addmed");
 const auth = require("./routes/auth");
 const filter = require("./routes/user/filter");
 const sendreq = require("./routes/user/sendreq");
-const session = require('express-session')
+
 
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 //create session 
 app.use (session(
   {
@@ -27,6 +29,7 @@ app.use (session(
     saveUninitialized: true
   }
 ));
+
 // Connect to MongoDB
 connectToMongoDB();
 

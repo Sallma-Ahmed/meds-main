@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/userModel");
 require("dotenv").config();
-const SECRET_KEY = 'edeloedeedeloedeyaomokhaled'; // Use the secret key from environment variables
+const SECRET_KEY = 'edeloedeedeloedeyaomokhaled' // Use the secret key from environment variables
 
 const authorized = async (req, res, next) => {
   try {
